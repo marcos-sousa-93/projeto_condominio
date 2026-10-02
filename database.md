@@ -2,7 +2,7 @@
 ## 1 - database.py
 
 ```python
-import sqlite3
+import sqlite3 # Biblioteca para trabalhar com bancos de dados SQLite
 ```
 import sqlite3
 
@@ -33,7 +33,7 @@ os.path.exists("arquivo.db") → verifica se o arquivo existe.
 <hr>
 
 ```python
-DB_PATH = os.path.join(os.path.dirname(__file__), 'condominio.db')
+DB_PATH = os.path.join(os.path.dirname(__file__), 'condominio.db') # D:\gestao-condominio\condominio.db
 ```
 os.path.dirname(file)
 
@@ -47,9 +47,24 @@ Ou seja, DB_PATH aponta para o banco dentro da mesma pasta do projeto, e não pa
 <hr>
 
 ```python
-def init_db():
-    conn = get_db()
-    cur = conn.cursor()
+def get_db(): # Função para obter a conexão com o banco de dados
+    conn = sqlite3.connect(DB_PATH) # Conecta ao banco de dados
+    conn.row_factory = sqlite3.Row # Permite acessar os resultados das consultas como dicionários
+    return conn # Retorna a conexão com o banco de dados
+```
+sqlite3.connect(DB_PATH)
+
+abre ou cria o arquivo do banco SQLite em DB_PATH
+se o arquivo ainda não existe, o SQLite cria automaticamente
+conn.row_factory = sqlite3.Row
+
+faz com que os resultados das consultas venham como linhas com acesso por nome
+<hr>
+
+```python
+def init_db(): # Função para inicializar o banco de dados
+    conn = get_db() # Conecta ao banco de dados
+    cur = conn.cursor() # Cria um cursor para executar comandos SQL
 ```
 A função abre uma conexão com o banco usando get_db() e cria um cursor, que poderá executar comandos SQL. Por enquanto, ela não executa comandos nem fecha a conexão; isso pode ser acrescentado quando você definir o que a inicialização do banco deve fazer.
 <hr>
@@ -116,5 +131,11 @@ IF NOT EXISTS impede que o script tente recriar uma tabela que já existe.
 conn.commit()
 ```
 commit() confirma e grava as alterações pendentes da conexão no banco. Assim, quando a função também fizer operações como inserir ou atualizar dados, elas serão persistidas. Neste caso, o SQLite pode confirmar a criação das tabelas automaticamente, mas deixar o commit() explícito é útil para garantir a confirmação das alterações.
+<hr>
+
+```python
+conn.close()
+```
+conn.close() fecha a conexão com o banco depois de confirmar as alterações. Isso libera os recursos usados e evita deixar conexões abertas sem necessidade. A validação do arquivo não encontrou erros.
 <hr>
 
