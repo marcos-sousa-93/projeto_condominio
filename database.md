@@ -139,3 +139,26 @@ conn.close()
 conn.close() fecha a conexão com o banco depois de confirmar as alterações. Isso libera os recursos usados e evita deixar conexões abertas sem necessidade. A validação do arquivo não encontrou erros.
 <hr>
 
+```python
+conn.execute("PRAGMA foreign_keys = ON")
+```
+Ela ativa a verificação de chaves estrangeiras para essa conexão SQLite. Assim, o banco aplica regras como FOREIGN KEY e ações relacionadas, por exemplo ON DELETE SET NULL, ajudando a manter os vínculos entre unidades e moradores consistentes. Como get_db() configura cada conexão, a regra fica ativada sempre que essa função é usada.
+
+Agora a função `get_db()` fica assim:
+```python
+def get_db(): # Função para obter a conexão com o banco de dados
+    conn = sqlite3.connect(DB_PATH) # Conecta ao banco de dados
+    conn.execute("PRAGMA foreign_keys = ON") 
+    conn.row_factory = sqlite3.Row  # Permite acessar os resultados das consultas como dicionários
+    return conn  # Retorna a conexão com o banco de dados
+```
+<hr>
+
+```python
+if __name__ == '__main__':
+    init_db()
+    print("Banco de dados inicializado em", DB_PATH)
+```
+Ele verifica se database.py está sendo executado diretamente. Se estiver, chama init_db() para criar as tabelas e imprime o caminho do banco. Se o arquivo for importado por outro módulo, como app.py, esse bloco não é executado automaticamente.
+<hr>
+
