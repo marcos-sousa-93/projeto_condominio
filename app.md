@@ -112,3 +112,21 @@ A rota fecha a conexão e envia esses dados ao template index.html com render_te
 A validação do arquivo não encontrou erros.
 
 Observação: index.html está vazio no momento, então a rota ainda não exibirá um painel até que o template receba conteúdo.
+<hr>
+
+```python
+pendentes = db.execute(
+    "SELECT COUNT(*) c FROM manutencao WHERE status != 'Concluído'"
+).fetchone()['c']
+```
+Agora a consulta conta solicitações de manutenção cujo status não seja Concluído — por exemplo, as pendentes ou em andamento. Antes, contava somente as que tinham exatamente o status Pendente.
+<hr>
+
+```python
+por_categoria = db.execute(
+        'SELECT categoria, SUM(valor) v FROM despesas GROUP BY categoria ORDER BY v DESC'
+    ).fetchall()
+```
+Ela continua somando as despesas por categoria, mas agora ordena os resultados pelo valor total (v) do maior para o menor. Assim, as categorias com maiores despesas aparecem primeiro.
+<hr>
+
