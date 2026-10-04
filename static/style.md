@@ -355,3 +355,36 @@ Ela faz as tabelas ocuparem toda a largura disponível, une as bordas das célul
 `overflow: hidden` mantém o conteúdo dentro dos cantos arredondados.
 <hr>
 
+```css
+th, td { 
+    padding: 12px 14px; 
+    text-align: left; 
+    font-size: 14px; 
+    border-bottom: 1px solid #eef1f6; 
+}
+```
+Adicionei a regra para `th` e `td` em `style.css`. 
+
+Ela dá espaçamento interno às células, alinha o texto à esquerda, define a fonte em 14 px e adiciona uma borda inferior fina para separar visualmente as linhas da tabela.
+<hr>
+
+```css
+th { 
+    background: #f8fafc; 
+    color: #475569; 
+    font-weight: 600; 
+}
+```
+Adicionei a regra `th` em `style.css`. 
+
+Ela estiliza os cabeçalhos das tabelas com fundo cinza-claro, texto cinza-azulado e peso de fonte 600 (seminegrito), destacando-os em relação às células de dados.
+<hr>
+
+```css
+tr:hover td { 
+    background: #f8fafc; 
+}
+```
+Quando o ponteiro passa sobre uma linha da tabela, as células (`td`) ficam com fundo cinza-claro. Isso ajuda a acompanhar visualmente a linha.
+<hr>
+
