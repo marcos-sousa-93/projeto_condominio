@@ -30,3 +30,21 @@ display: flex habilita o layout flexível da página.
 min-height: 100vh garante que o corpo ocupe pelo menos toda a altura da janela do navegador.
 <hr>
 
+```css
+.sidebar {
+  width: 230px;
+  background: #1e293b;
+  color: #fff;
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+```
+Adicionei as regras .sidebar em style.css. 
+
+Elas dão à barra lateral largura de 230 px, fundo azul-escuro, texto branco e espaçamento interno. 
+
+position: sticky com top: 0 mantém a barra visível no topo ao rolar a página, e height: 100vh faz com que ela ocupe a altura da janela.
+<hr>
+
