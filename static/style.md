@@ -388,3 +388,161 @@ tr:hover td {
 Quando o ponteiro passa sobre uma linha da tabela, as células (`td`) ficam com fundo cinza-claro. Isso ajuda a acompanhar visualmente a linha.
 <hr>
 
+```css
+.del { 
+    color: #ef4444; 
+    text-decoration: none; 
+    font-weight: 600; 
+}
+```
+Adicionei a regra `.del` em `style.css`. Ela estiliza links com essa classe — usados para ações de exclusão — em vermelho, sem sublinhado e com texto seminegrito.
+<hr>
+
+```css
+.del:hover { 
+    text-decoration: underline; 
+}
+```
+Ao passar o ponteiro sobre um link com a classe del, o texto fica sublinhado para indicar visualmente que ele é interativo.
+<hr>
+
+```css
+.tag {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #e2e8f0;
+  color: #334155;
+}
+```
+Adicionei a regra `.tag` em `style.css`. Ela cria etiquetas compactas para prioridades e status: ficam alinhadas ao texto, com espaçamento interno, formato arredondado, fonte pequena e seminegrito, fundo cinza-claro e texto escuro.
+<hr>
+
+```css
+.tag.baixa { 
+    background: #dcfce7; 
+    color: #166534; 
+}
+```
+Adicionei a regra `.tag.baixa` em `style.css`. Ela estiliza etiquetas que tenham as classes tag e baixa com fundo verde-claro e texto verde-escuro — por exemplo, para indicar prioridade baixa.
+<hr>
+
+```css
+.tag.normal { 
+    background: #dbeafe; 
+    color: #1e40af; 
+}
+```
+Adicionei a regra `.tag.normal` em `style.css`. Ela estiliza etiquetas com as classes tag e normal com fundo azul-claro e texto azul-escuro, por exemplo, para representar prioridade normal.
+<hr>
+
+```css
+.tag.alta { 
+    background: #fef3c7; 
+    color: #92400e; 
+}
+```
+Adicionei a regra `.tag.alta` em `style.css`. 
+
+Ela estiliza etiquetas com as classes tag e alta com fundo amarelo-claro e texto marrom-escuro, distinguindo visualmente a prioridade alta.
+<hr>
+
+```css
+.tag.urgente { 
+    background: #fee2e2; 
+    color: #991b1b; 
+}
+```
+Adicionei a regra `.tag.urgente` em style.css. 
+
+Ela estiliza etiquetas com as classes tag e urgente com fundo vermelho-claro e texto vermelho-escuro, destacando chamados de prioridade urgente.
+<hr>
+
+```css
+.tag.status.pendente { 
+    background: #fef3c7; 
+    color: #92400e; 
+}
+```
+Ela se aplica a um elemento que tenha, ao mesmo tempo, as classes tag, status e pendente. 
+
+Nesse caso, o fundo fica amarelo-claro e o texto marrom-escuro, destacando chamados pendentes.
+<hr>
+
+```css
+.tag.status.em.andamento { 
+    background: #dbeafe; 
+    color: #1e40af; 
+}
+```
+Ela estiliza etiquetas com as classes tag, status, em e andamento com fundo azul-claro e texto azul-escuro. 
+
+Isso destaca chamados cujo status é “Em andamento”.
+<hr>
+
+```css
+.tag.status.concluido { 
+    background: #dcfce7; 
+    color: #166534; 
+}
+```
+Ela aplica fundo verde-claro e texto verde-escuro às etiquetas de status Concluído, indicando visualmente que o chamado foi finalizado.
+<hr>
+
+```css
+.flash {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+```
+Adicionei a regra `.flash` em `style.css`. 
+
+Ela define o espaçamento interno, cantos arredondados, margem inferior e peso médio da fonte para as mensagens temporárias exibidas com `flash()` no Flask.
+<hr>
+
+```css
+.flash.ok { 
+    background: #dcfce7; 
+    color: #166534; 
+}
+```
+Adicionei a regra `.flash.ok` em `style.css`. Ela estiliza mensagens flash com a classe ok — como confirmações de cadastro — com fundo verde-claro e texto verde-escuro.
+<hr>
+
+```css
+.flash.erro { 
+    background: #fee2e2; 
+    color: #991b1b; 
+}
+```
+Adicionei a regra `.flash.erro` em `style.css`. 
+
+Ela estiliza mensagens flash da categoria erro com fundo vermelho-claro e texto vermelho-escuro, diferenciando-as visualmente das mensagens de sucesso.
+<hr>
+
+```css
+.aviso small { 
+    color: #94a3b8; 
+    margin-left: 8px; 
+    font-size: 12px; 
+}
+```
+Adicionei a regra `.aviso small` em `style.css`. 
+
+Ela estiliza os elementos `<small>` dentro de blocos com a classe aviso, como a data do aviso: usa texto cinza-claro, fonte de 12 px e margem de 8 px à esquerda.
+<hr>
+
+```css
+.aviso p { 
+    margin: 8px 0; 
+    color: #475569; 
+}
+```
+Adicionei a regra `.aviso p` em `style.css`. 
+
+Ela aplica 8 px de margem acima e abaixo dos parágrafos dentro dos avisos e define o texto em cinza-azulado.
+<hr>
