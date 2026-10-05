@@ -410,14 +410,76 @@ O ? na consulta passa o ID como parâmetro, em vez de incorporá-lo diretamente 
 <hr>
 
 ```python
+def get_local_ip():
+    """Descobre o IP local da máquina na rede (sem precisar de internet)."""
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # Não envia pacotes de verdade, só descobre a interface usada
+        s.connect(('8.8.8.8', 80))
+        ip = s.getsockname()[0]
+    except Exception:
+        ip = '127.0.0.1'
+    finally:
+        s.close()
+    return ip
+```
+A função get_local_ip() tenta descobrir o endereço IP local que a máquina usaria para se comunicar pela rede:
+
+socket.socket(socket.AF_INET, socket.SOCK_DGRAM) cria um socket IPv4 para comunicação UDP.
+
+s.connect(('8.8.8.8', 80)) informa ao sistema operacional um destino externo. Em UDP, isso normalmente não envia dados; serve para o sistema escolher a interface e o endereço local apropriados. Apesar do endereço de destino ser externo, a função não precisa receber uma resposta da internet para obter o IP.
+
+s.getsockname()[0] retorna o endereço IP local associado a essa interface.
+
+Se ocorrer uma exceção, a função usa 127.0.0.1, que é o endereço de loopback: acessível apenas pela própria máquina.
+
+finally: s.close() fecha o socket mesmo que tenha ocorrido erro.
+
+return ip devolve o endereço encontrado ou o endereço de loopback.
+
+A função depende de socket estar importado no arquivo, normalmente com import socket. O resultado pode variar conforme as interfaces e rotas de rede configuradas.
+<hr>
+
+```python
 if __name__ == '__main__':
     init_db()
-    app.run(host='127.0.0.1', port=5000, debug=True)
-```
-Ele executa apenas quando app.py é iniciado diretamente:
+    ip = get_local_ip()
+    port = 5000
+    print("\n" + "=" * 55)
+    print("  🏢  Sistema de Gestão de Condomínio - ONLINE")
+    print("=" * 55)
+    print(f"  💻  Neste computador : http://127.0.0.1:{port}")
+    print(f"  📱  Na rede local    : http://{ip}:{port}")
+    print("=" * 55)
+    print("  Pressione CTRL+C para encerrar.\n")
 
-init_db() cria as tabelas do banco, caso ainda não existam.
-app.run(...) inicia o servidor Flask no endereço local 127.0.0.1, na porta 5000.
-debug=True ativa o modo de depuração, que facilita encontrar erros durante o desenvolvimento.
-O modo de depuração é apropriado para desenvolvimento, não para produção.
+    app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
+```
+Esse bloco inicia a aplicação quando `app.py` é executado diretamente, por exemplo com `python app.py`:
+
+`if __name__ == '__main__':` verifica se o arquivo foi iniciado diretamente. Se `app.py` for importado por outro módulo, o bloco não roda.
+
+`init_db()` cria as tabelas do banco, caso ainda não existam.
+
+`ip = get_local_ip()` obtém o endereço IP local da máquina na rede.
+
+`port = 5000` define a porta que o servidor Flask usará.
+
+Os comandos `print()` exibem no terminal o estado do sistema e os endereços para acessá-lo:
+`http://127.0.0.1:5000` funciona neste computador.
+
+`http://<IP local>:5000` permite o acesso por outros dispositivos na mesma rede, se a rede e o firewall permitirem.
+
+app.run(...) inicia o servidor:
+`host='0.0.0.0'` faz com que ele aceite conexões por todas as interfaces de rede da máquina.
+
+`port=port` usa a porta 5000.
+
+`debug=False` desativa o modo de depuração.
+
+threaded=True permite tratar requisições em threads, possibilitando atender várias ao mesmo tempo.
+
+`CTRL+C` interrompe o servidor no terminal.
+
+Atenção: 0.0.0.0 pode tornar o sistema acessível a outros dispositivos da rede. O servidor integrado do Flask é apropriado para desenvolvimento, não para hospedar uma aplicação em produção. O bloco está em app.py.
 <hr>
